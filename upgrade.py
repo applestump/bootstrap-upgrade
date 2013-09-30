@@ -4,8 +4,10 @@ import re
 import sys
 import os
 from pyquery import PyQuery as pq
+from django.utils.encoding import smart_str, smart_unicode
 from lxml import etree
 import urllib
+import codecs
 
 #List to collect any errors we run into
 errorList = []
@@ -57,6 +59,9 @@ for file in fileList:
       output = f.read()
       f.close()
 
+    #Convert to utf-8 or we get UnicodeEncodingErrors from the XML Parser!
+    output = unicode(output.strip(codecs.BOM_UTF8), 'utf-8')
+
     #Regular expression replacements
     for rule in rules:
       output = re.sub(rule['regex'], rule['rep'], output)
@@ -102,14 +107,22 @@ for file in fileList:
     #Images
     d.find('img').addClass("img-responsive")
 
-    #Write file
-    f = open(file, "w")
-    f.write(d.html())
-    f.close()
-
   except Exception as e:
-    fileError = {'file': file, 'exception': e.message}
+    fileError = {'file': file, 'exception':'Before saving: '+str(e)}
     errorList.append(fileError)
+    
+  else:
+    #Write file
+    try:
+      if(d.html()):
+        f = open(file, "w")
+        #write and convert encoding
+        f.write(smart_str(d.html()))
+        f.close()
+
+    except Exception as e:
+      fileError = {'file': file, 'exception': 'After saving: '+ str(e)}
+      errorList.append(fileError)
 
 #If we've encountered any exceptions, print out the errors to help the user.
 if(len(errorList)>0):

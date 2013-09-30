@@ -13,13 +13,16 @@ Requirements
 ============
 Getting up and running is very simple.
 
-You'll just need python installed and the pyquery module installed. Python comes pre-installed on OS X and most Linux distributions, so in most cases there's nothing to do, but see the python website if you're unsure.
+You'll just need python installed and the pyquery and django utils module. Python comes pre-installed on OS X and most Linux distributions, so in most cases there's nothing to do, but see the python website if you're unsure.
 
-To install the pyquery module, you can type:
+To install the modules, you can type:
 
 ```sh
-# easy_install pyquery
+# pip install pyquery
+# pip install django
 ```
+
+(If you don't want to install the whole set of django modules, you can use ```sh pip install django-utils ``` instead).
 
 A note to users of OS X: If you get complaints and errors about 'clang', [there is a simple fix here.](http://jaranto.blogspot.co.uk/2012/08/os-x-unable-to-execute-clang-no-such.html)
 
