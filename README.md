@@ -22,7 +22,7 @@ To install the modules, you can type:
 # pip install django
 ```
 
-(If you don't want to install the whole set of django modules, you can use ```sh pip install django-utils ``` instead).
+(If you don't want to install the whole set of django modules, you can use ``` pip install django-utils ``` instead).
 
 A note to users of OS X: If you get complaints and errors about 'clang', [there is a simple fix here.](http://jaranto.blogspot.co.uk/2012/08/os-x-unable-to-execute-clang-no-such.html)
 
