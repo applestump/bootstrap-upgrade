@@ -55,6 +55,7 @@ for file in fileList:
   try:
     with open(file,'r') as f:
       output = f.read()
+      f.close()
 
     #Regular expression replacements
     for rule in rules:
@@ -101,9 +102,10 @@ for file in fileList:
     #Images
     d.find('img').addClass("img-responsive")
 
-    str = d.html() 
-
-    print str
+    #Write file
+    f = open(file, "w")
+    f.write(d.html())
+    f.close()
 
   except Exception as e:
     fileError = {'file': file, 'exception': e.message}
